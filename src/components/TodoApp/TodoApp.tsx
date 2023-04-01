@@ -89,11 +89,16 @@ export default class TodoApp extends React.Component<
     this.setState({ tasks: currTasks });
   };
 
+  itemsLeft() {
+    return this.state.tasks.filter((e) => !e.isDone).length;
+  }
+
   render() {
     return (
       <section className='todoapp'>
         <Header addTask={this.addTask} />
         <MainSection
+          itemsLeft={this.itemsLeft()}
           changeTasks={this.changeFunctions.current}
           refactorFunctions={this.refactorFunctions.current}
           tasks={this.filteredTasks()}
