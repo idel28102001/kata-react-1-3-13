@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import TasksFilter from '../TasksFilter/TasksFilter';
+import TasksFilter from '../TasksFilter';
 import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
 import { ChangeTasks } from '../../types/FilterTasks';
 
@@ -10,7 +10,7 @@ interface FooterPropsInterface {
   changeTasks: ChangeTasks;
 }
 
-class Footer extends React.Component<FooterPropsInterface, unknown> {
+export default class Footer extends React.Component<FooterPropsInterface, unknown> {
   render() {
     return (
       <footer className='footer'>
@@ -26,5 +26,3 @@ class Footer extends React.Component<FooterPropsInterface, unknown> {
     );
   }
 }
-
-export default Footer;

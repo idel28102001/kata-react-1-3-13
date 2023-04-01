@@ -1,7 +1,7 @@
 import './TodoApp.css';
 import React from 'react';
-import Header from '../Header/Header';
-import MainSection from '../MainSection/MainSection';
+import Header from '../Header';
+import MainSection from '../MainSection';
 import { TaskInterface, TaskPropsInterface } from '../../types/TaskInterface';
 import { TaskFilterFlags, TaskFilterItemInterface } from '../../types/TaskFilterInterface';
 import { RefactorTaskMethods } from '../../types/RefactorTask';
@@ -18,19 +18,16 @@ interface TodoAppStateInterface {
   flag: TaskFilterFlags;
 }
 
-class TodoApp extends React.Component<TodoAppPropsInterface, TodoAppStateInterface, null> {
+export default class TodoApp extends React.Component<
+  TodoAppPropsInterface,
+  TodoAppStateInterface,
+  null
+> {
   refactorFunctions: { current: RefactorTaskMethods };
   changeFunctions: { current: ChangeTasks };
 
   constructor(props: TodoAppPropsInterface) {
     super(props);
-    this.addTask = this.addTask.bind(this);
-    this.removeTask = this.removeTask.bind(this);
-    this.completeTask = this.completeTask.bind(this);
-    this.editTask = this.editTask.bind(this);
-    this.removeCompleted = this.removeCompleted.bind(this);
-    this.filterTasks = this.filterTasks.bind(this);
-    this.state = { ...this.props, flag: TaskFilterFlags.ALL };
     this.refactorFunctions = {
       current: {
         completeTask: this.completeTask,
@@ -41,9 +38,10 @@ class TodoApp extends React.Component<TodoAppPropsInterface, TodoAppStateInterfa
     this.changeFunctions = {
       current: { removeCompleted: this.removeCompleted, filterTasks: this.filterTasks },
     };
+    this.state = { ...this.props, flag: TaskFilterFlags.ALL };
   }
 
-  filteredTasks() {
+  filteredTasks = () => {
     switch (this.state.flag) {
       case TaskFilterFlags.ALL: {
         return this.state.tasks;
@@ -55,41 +53,41 @@ class TodoApp extends React.Component<TodoAppPropsInterface, TodoAppStateInterfa
         return this.state.tasks.filter((e) => e.isDone);
       }
     }
-  }
+  };
 
-  removeCompleted() {
+  removeCompleted = () => {
     this.setState({ tasks: this.state.tasks.filter((e) => !e.isDone) });
-  }
+  };
 
-  filterTasks(flag: TaskFilterFlags) {
+  filterTasks = (flag: TaskFilterFlags) => {
     this.setState({ flag });
-  }
+  };
 
-  addTask(task: TaskPropsInterface) {
+  addTask = (task: TaskPropsInterface) => {
     const id = Math.max(...[...this.state.tasks.map((e) => e.id), 0]) + 1;
     const newTasks = [...this.state.tasks, { ...task, id }];
     this.setState({ tasks: newTasks });
-  }
+  };
 
-  removeTask(id: number) {
+  removeTask = (id: number) => {
     this.setState({ tasks: this.state.tasks.filter((e) => e.id !== id) });
-  }
+  };
 
-  completeTask(id: number, isDone: boolean) {
+  completeTask = (id: number, isDone: boolean) => {
     const currTasks = this.state.tasks.map((e) => {
       if (e.id !== id) return e;
       return { ...e, isDone };
     });
     this.setState({ tasks: currTasks });
-  }
+  };
 
-  editTask(id: number, description: string) {
+  editTask = (id: number, description: string) => {
     const currTasks = this.state.tasks.map((e) => {
       if (e.id !== id) return e;
       return { ...e, description };
     });
     this.setState({ tasks: currTasks });
-  }
+  };
 
   render() {
     return (
@@ -105,5 +103,3 @@ class TodoApp extends React.Component<TodoAppPropsInterface, TodoAppStateInterfa
     );
   }
 }
-
-export default TodoApp;

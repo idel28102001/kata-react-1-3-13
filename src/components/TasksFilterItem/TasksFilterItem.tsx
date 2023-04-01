@@ -8,15 +8,13 @@ interface TaskFilterItemPropsInterface {
   filterTasks: FilterTasks;
 }
 
-class TasksFilterItem extends React.Component<TaskFilterItemPropsInterface, unknown> {
-  constructor(props: TaskFilterItemPropsInterface) {
-    super(props);
-    this.filterTasks = this.filterTasks.bind(this);
-  }
-
-  filterTasks() {
+export default class TasksFilterItem extends React.Component<
+  TaskFilterItemPropsInterface,
+  unknown
+> {
+  filterTasks = () => {
     this.props.filterTasks(this.props.item.value);
-  }
+  };
 
   render() {
     return (
@@ -37,5 +35,3 @@ class TasksFilterItem extends React.Component<TaskFilterItemPropsInterface, unkn
     );
   }
 }
-
-export default TasksFilterItem;

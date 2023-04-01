@@ -9,7 +9,7 @@ interface TaskListPropsInterface {
   refactorFunctions: RefactorTaskMethods;
 }
 
-class TaskList extends React.Component<TaskListPropsInterface, unknown> {
+export default class TaskList extends React.Component<TaskListPropsInterface, unknown> {
   render() {
     return (
       <ul className='todo-list'>
@@ -20,5 +20,3 @@ class TaskList extends React.Component<TaskListPropsInterface, unknown> {
     );
   }
 }
-
-export default TaskList;

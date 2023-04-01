@@ -8,16 +8,15 @@ interface NewTaskFormPropsInterface {
   addTask: AddTaskType;
 }
 
-class NewTaskForm extends React.Component<NewTaskFormPropsInterface, unknown> {
+export default class NewTaskForm extends React.Component<NewTaskFormPropsInterface, unknown> {
   ref: React.RefObject<HTMLInputElement>;
 
   constructor(props: NewTaskFormPropsInterface) {
     super(props);
     this.ref = createRef<HTMLInputElement>();
-    this.addTask = this.addTask.bind(this);
   }
 
-  addTask(e: React.FormEvent<HTMLFormElement>) {
+  addTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (this.ref.current) {
       const current = this.ref.current;
@@ -27,7 +26,7 @@ class NewTaskForm extends React.Component<NewTaskFormPropsInterface, unknown> {
         current.value = '';
       }
     }
-  }
+  };
 
   render() {
     return (
@@ -38,5 +37,3 @@ class NewTaskForm extends React.Component<NewTaskFormPropsInterface, unknown> {
     );
   }
 }
-
-export default NewTaskForm;

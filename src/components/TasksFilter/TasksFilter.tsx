@@ -1,6 +1,6 @@
 import React from 'react';
 import './TasksFilter.css';
-import TasksFilterItem from '../TasksFilterItem/TasksFilterItem';
+import TasksFilterItem from '../TasksFilterItem';
 import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
 import { FilterTasks } from '../../types/FilterTasks';
 
@@ -9,11 +9,7 @@ interface TaskFilterPropsInterface {
   filterTasks: FilterTasks;
 }
 
-class TasksFilter extends React.Component<TaskFilterPropsInterface, unknown> {
-  constructor(props: TaskFilterPropsInterface) {
-    super(props);
-  }
-
+export default class TasksFilter extends React.Component<TaskFilterPropsInterface, unknown> {
   render() {
     return (
       <ul className='filters'>
@@ -28,5 +24,3 @@ class TasksFilter extends React.Component<TaskFilterPropsInterface, unknown> {
     );
   }
 }
-
-export default TasksFilter;

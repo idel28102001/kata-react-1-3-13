@@ -1,17 +1,13 @@
 import './Header.css';
 import React from 'react';
-import NewTaskForm from '../NewTaskForm/NewTaskForm';
+import NewTaskForm from '../NewTaskForm';
 import { AddTaskType } from '../../types/RefactorTask';
 
 interface HeaderPropsInterface {
   addTask: AddTaskType;
 }
 
-class Header extends React.Component<HeaderPropsInterface, unknown> {
-  constructor(props: HeaderPropsInterface) {
-    super(props);
-  }
-
+export default class Header extends React.Component<HeaderPropsInterface, unknown> {
   render() {
     return (
       <header className='header'>
@@ -21,5 +17,3 @@ class Header extends React.Component<HeaderPropsInterface, unknown> {
     );
   }
 }
-
-export default Header;

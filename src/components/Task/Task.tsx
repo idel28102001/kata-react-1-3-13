@@ -12,22 +12,23 @@ interface TaskItemStateInterface {
   isEditing: boolean;
 }
 
-class Task extends React.PureComponent<TaskItemPropsInterface, TaskItemStateInterface> {
+export default class Task extends React.PureComponent<
+  TaskItemPropsInterface,
+  TaskItemStateInterface
+> {
   ref: React.RefObject<HTMLInputElement>;
 
   constructor(props: TaskItemPropsInterface) {
     super(props);
     this.state = { isEditing: false };
     this.ref = createRef<HTMLInputElement>();
-    this.setToEdit = this.setToEdit.bind(this);
-    this.editTask = this.editTask.bind(this);
   }
 
-  setToEdit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  setToEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     this.setState((e) => ({ isEditing: !e.isEditing }));
-  }
+  };
 
-  editTask(e: React.FormEvent<HTMLFormElement>) {
+  editTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (this.ref.current) {
       const current = this.ref.current;
@@ -41,7 +42,7 @@ class Task extends React.PureComponent<TaskItemPropsInterface, TaskItemStateInte
       }
     }
     this.setState((e) => ({ isEditing: !e.isEditing }));
-  }
+  };
 
   render() {
     const task = this.props.task;
@@ -81,5 +82,3 @@ class Task extends React.PureComponent<TaskItemPropsInterface, TaskItemStateInte
     );
   }
 }
-
-export default Task;
