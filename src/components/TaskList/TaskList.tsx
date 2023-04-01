@@ -1,8 +1,9 @@
 import React from 'react';
-import Task from '../Task';
 import './TaskList.css';
-import { TaskInterface } from '../../types/TaskInterface';
 import { RefactorTaskMethods } from '../../types/RefactorTask';
+import PropTypes from 'prop-types';
+import Task from '../Task';
+import { TaskInterface } from '../../types/TaskInterface';
 
 interface TaskListPropsInterface {
   tasks: Array<TaskInterface>;
@@ -10,6 +11,14 @@ interface TaskListPropsInterface {
 }
 
 export default class TaskList extends React.Component<TaskListPropsInterface, unknown> {
+  static propTypes = {
+    tasks: PropTypes.array.isRequired,
+  };
+
+  static defaultProps = {
+    tasks: [],
+  };
+
   render() {
     return (
       <ul className='todo-list'>

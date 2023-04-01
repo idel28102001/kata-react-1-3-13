@@ -3,6 +3,7 @@ import './TasksFilter.css';
 import TasksFilterItem from '../TasksFilterItem';
 import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
 import { FilterTasks } from '../../types/FilterTasks';
+import PropTypes from 'prop-types';
 
 interface TaskFilterPropsInterface {
   filters: Array<TaskFilterItemInterface>;
@@ -10,6 +11,14 @@ interface TaskFilterPropsInterface {
 }
 
 export default class TasksFilter extends React.Component<TaskFilterPropsInterface, unknown> {
+  static propTypes = {
+    filters: PropTypes.array.isRequired,
+  };
+
+  static defaultProps = {
+    filters: [],
+  };
+
   render() {
     return (
       <ul className='filters'>

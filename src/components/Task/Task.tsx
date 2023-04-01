@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import './Task.css';
 import { TaskInterface } from '../../types/TaskInterface';
 import { RefactorTaskMethods } from '../../types/RefactorTask';
+import CreatedNAgo from '../CreatedNAgo';
 
 interface TaskItemPropsInterface {
   task: TaskInterface;
@@ -58,7 +59,7 @@ export default class Task extends React.PureComponent<
           />
           <label>
             <span className='description'>{task.description}</span>
-            <span className='created'>created 5 minutes ago</span>
+            <CreatedNAgo createdAt={task.createdAt} />
           </label>
           <button className='icon icon-edit' onClick={this.setToEdit} />
           <button
