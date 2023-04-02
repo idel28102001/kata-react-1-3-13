@@ -10,10 +10,7 @@ interface CreatedNAgoStateInterface {
   render: number;
 }
 
-export default class CreatedNAgo extends React.Component<
-  CreatedNAgoPropsInterface,
-  CreatedNAgoStateInterface
-> {
+export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterface, CreatedNAgoStateInterface> {
   state = { render: 0 };
   isDidMount = false;
 
@@ -37,6 +34,6 @@ export default class CreatedNAgo extends React.Component<
   }
 
   render() {
-    return <span className='created'>{this.createdAt()}</span>;
+    return <span className="created">{this.createdAt()}</span>;
   }
 }
