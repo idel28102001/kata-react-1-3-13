@@ -1,4 +1,5 @@
 import React, { createRef } from 'react';
+
 import './Task.css';
 import { TaskInterface } from '../../types/TaskInterface';
 import { RefactorTaskMethods } from '../../types/RefactorTask';
@@ -13,10 +14,7 @@ interface TaskItemStateInterface {
   isEditing: boolean;
 }
 
-export default class Task extends React.PureComponent<
-  TaskItemPropsInterface,
-  TaskItemStateInterface
-> {
+export default class Task extends React.PureComponent<TaskItemPropsInterface, TaskItemStateInterface> {
   ref: React.RefObject<HTMLInputElement>;
 
   constructor(props: TaskItemPropsInterface) {
@@ -25,7 +23,7 @@ export default class Task extends React.PureComponent<
     this.ref = createRef<HTMLInputElement>();
   }
 
-  setToEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  setToEdit = () => {
     this.setState((e) => ({ isEditing: !e.isEditing }));
   };
 
@@ -50,34 +48,25 @@ export default class Task extends React.PureComponent<
     const liClass = this.state.isEditing ? 'editing' : task.isDone ? 'completed' : '';
     return (
       <li className={liClass}>
-        <div className='view'>
+        <div className="view">
           <input
-            className='toggle'
-            type='checkbox'
+            className="toggle"
+            type="checkbox"
             defaultChecked={task.isDone}
             onChange={(e) => this.props.refactorFunctions.completeTask(task.id, e.target.checked)}
           />
           <label>
-            <span className='description'>{task.description}</span>
+            <span className="description">{task.description}</span>
             <CreatedNAgo createdAt={task.createdAt} />
           </label>
-          <button className='icon icon-edit' onClick={this.setToEdit} />
-          <button
-            className='icon icon-destroy'
-            onClick={() => this.props.refactorFunctions.removeTask(task.id)}
-          />
+          <button className="icon icon-edit" onClick={this.setToEdit} />
+          <button className="icon icon-destroy" onClick={() => this.props.refactorFunctions.removeTask(task.id)} />
         </div>
         <form onSubmit={this.editTask}>
           {this.state.isEditing && (
-            <input
-              ref={this.ref}
-              type='text'
-              className='edit'
-              defaultValue={task.description}
-              autoFocus
-            />
+            <input ref={this.ref} type="text" className="edit" defaultValue={task.description} autoFocus />
           )}
-          <input type='submit' className='edit-submit' />
+          <input type="submit" className="edit-submit" />
         </form>
       </li>
     );

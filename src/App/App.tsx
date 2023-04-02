@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './App.css';
 import { TaskInterface } from '../types/TaskInterface';
 import { TaskFilterFlags, TaskFilterItemInterface } from '../types/TaskFilterInterface';
@@ -33,7 +34,7 @@ export default class App extends React.Component<unknown, unknown> {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <TodoApp filters={this.filters} tasks={this.tasks} />
       </div>
     );

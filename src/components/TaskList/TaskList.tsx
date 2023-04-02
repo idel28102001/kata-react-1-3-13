@@ -1,8 +1,9 @@
-import React from 'react';
 import './TaskList.css';
-import { RefactorTaskMethods } from '../../types/RefactorTask';
+import React from 'react';
 import PropTypes from 'prop-types';
+
 import Task from '../Task';
+import { RefactorTaskMethods } from '../../types/RefactorTask';
 import { TaskInterface } from '../../types/TaskInterface';
 
 interface TaskListPropsInterface {
@@ -21,7 +22,7 @@ export default class TaskList extends React.Component<TaskListPropsInterface, un
 
   render() {
     return (
-      <ul className='todo-list'>
+      <ul className="todo-list">
         {this.props.tasks.map((task) => (
           <Task refactorFunctions={this.props.refactorFunctions} task={task} key={task.id} />
         ))}

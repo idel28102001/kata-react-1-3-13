@@ -1,5 +1,6 @@
 import './NewTaskForm.css';
 import React, { createRef } from 'react';
+
 import { TaskPropsInterface } from '../../types/TaskInterface';
 import TaskInstance from '../../common/TaskInstance';
 import { AddTaskType } from '../../types/RefactorTask';
@@ -31,8 +32,8 @@ export default class NewTaskForm extends React.Component<NewTaskFormPropsInterfa
   render() {
     return (
       <form onSubmit={this.addTask}>
-        <input ref={this.ref} className='new-todo' placeholder='What needs to be done?' autoFocus />
-        <input type='submit' className='new-todo-submit' />
+        <input ref={this.ref} className="new-todo" placeholder="What needs to be done?" autoFocus />
+        <input type="submit" className="new-todo-submit" />
       </form>
     );
   }
