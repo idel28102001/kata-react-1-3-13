@@ -47,6 +47,7 @@ export default class Task extends React.PureComponent<
 
   render() {
     const task = this.props.task;
+    const task2 = this.props.task;
     const liClass = this.state.isEditing ? 'editing' : task.isDone ? 'completed' : '';
     return (
       <li className={liClass}>
