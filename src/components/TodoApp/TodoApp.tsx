@@ -9,7 +9,6 @@ import { RefactorTaskMethods } from '../../types/RefactorTask';
 import { ChangeTasks } from '../../types/FilterTasks';
 
 interface TodoAppPropsInterface {
-  tasks: Array<TaskInterface>;
   filters: Array<TaskFilterItemInterface>;
 }
 
@@ -35,8 +34,29 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     this.changeFunctions = {
       current: { removeCompleted: this.removeCompleted, filterTasks: this.filterTasks },
     };
-    this.state = { ...this.props, flag: TaskFilterFlags.ALL };
+    const tasks = this.loadTasks();
+    this.state = { ...props, tasks, flag: TaskFilterFlags.ALL };
   }
+
+  saveTasks = (tasks: Array<TaskInterface>) => {
+    const jsonString = JSON.stringify(tasks || []);
+    localStorage.setItem('tasks', jsonString);
+  };
+
+  componentDidUpdate() {
+    this.saveTasks(this.state.tasks);
+  }
+
+  loadTasks = () => {
+    const jsonString = localStorage.getItem('tasks') || '';
+    let result: Array<TaskInterface>;
+    try {
+      result = JSON.parse(jsonString) || [];
+    } catch (e: unknown) {
+      result = [];
+    }
+    return result.map((e) => ({ ...e, createdAt: new Date(e.createdAt) }));
+  };
 
   filteredTasks = () => {
     switch (this.state.flag) {
