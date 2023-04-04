@@ -1,6 +1,8 @@
+import classNames from 'classnames';
 import React, { createRef } from 'react';
 
 import './Task.css';
+
 import CreatedNAgo from '../CreatedNAgo';
 import { TaskInterface } from '../../common/createTask';
 
@@ -10,47 +12,50 @@ export interface RefactorTaskMethods {
   editTask: (id: number, description: string) => void;
 }
 
-interface TaskItemPropsInterface {
+interface TaskProps {
   task: TaskInterface;
   refactorFunctions: RefactorTaskMethods;
 }
 
-interface TaskItemStateInterface {
+interface TaskState {
   isEditing: boolean;
 }
 
-export default class Task extends React.PureComponent<TaskItemPropsInterface, TaskItemStateInterface> {
+export default class Task extends React.PureComponent<TaskProps, TaskState> {
   ref: React.RefObject<HTMLInputElement>;
 
-  constructor(props: TaskItemPropsInterface) {
+  constructor(props: TaskProps) {
     super(props);
     this.state = { isEditing: false };
     this.ref = createRef<HTMLInputElement>();
   }
 
   setToEdit = () => {
-    this.setState((e) => ({ isEditing: !e.isEditing }));
+    this.setState({ isEditing: true });
   };
 
   editTask = (e: React.FormEvent<HTMLFormElement>) => {
+    this.editTaskText(e);
+    this.setState({ isEditing: false });
+  };
+
+  editTaskText = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (this.ref.current) {
-      const current = this.ref.current;
-      const value = current.value.trim();
-      if (value !== this.props.task.description) {
-        if (!value) {
-          this.ref.current.value = this.props.task.description;
-        } else {
-          this.props.refactorFunctions.editTask(this.props.task.id, value);
-        }
-      }
+    if (!this.ref.current) return;
+    const current = this.ref.current;
+    const value = current.value.trim();
+    if (value === this.props.task.description) return;
+    if (!value) {
+      this.ref.current.value = this.props.task.description;
+    } else {
+      this.props.refactorFunctions.editTask(this.props.task.id, value);
     }
-    this.setState((e) => ({ isEditing: !e.isEditing }));
   };
 
   render() {
     const task = this.props.task;
-    const liClass = this.state.isEditing ? 'editing' : task.isDone ? 'completed' : '';
+    const liClass = classNames({ editing: this.state.isEditing });
+    // const liClass = this.state.isEditing ? 'editing' : task.isDone ? 'completed' : '';
     return (
       <div className={liClass}>
         <div className="view">
