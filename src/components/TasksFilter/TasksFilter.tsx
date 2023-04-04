@@ -1,10 +1,8 @@
 import './TasksFilter.css';
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import TasksFilterItem from '../TasksFilterItem';
-import { TaskFilters } from '../../types/TaskFilterInterface';
-import { FilterTasks } from '../../types/FilterTasks';
+import { FilterTasks, TaskFilters } from '../TasksFilterItem/TasksFilterItem';
 
 interface TaskFilterPropsInterface {
   filters: Array<TaskFilters>;
@@ -12,14 +10,6 @@ interface TaskFilterPropsInterface {
 }
 
 export default class TasksFilter extends React.Component<TaskFilterPropsInterface, unknown> {
-  static propTypes = {
-    filters: PropTypes.array.isRequired,
-  };
-
-  static defaultProps = {
-    filters: [],
-  };
-
   render() {
     return (
       <ul className="filters">

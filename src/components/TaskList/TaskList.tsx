@@ -2,8 +2,8 @@ import './TaskList.css';
 import React from 'react';
 
 import Task from '../Task';
-import { RefactorTaskMethods } from '../../types/RefactorTask';
-import { TaskInterface } from '../../types/TaskInterface';
+import { RefactorTaskMethods } from '../Task/Task';
+import { TaskInterface } from '../../common/createTask';
 
 interface TaskListPropsInterface {
   tasks: Array<TaskInterface>;

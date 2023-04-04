@@ -12,7 +12,7 @@ interface CreatedNAgoState {
 
 export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterface, CreatedNAgoState> {
   state = { render: 0 };
-  interval = -1 as any as NodeJS.Timer;
+  interval = -1 as never as NodeJS.Timer;
 
   componentDidMount() {
     this.interval = setInterval(() => {
@@ -24,7 +24,7 @@ export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterfa
     clearInterval(this.interval);
   }
 
-  createdAt() {
+  createdAt(): string {
     return `created ${formatDistanceToNow(this.props.createdAt)} ago`;
   }
 

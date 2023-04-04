@@ -2,8 +2,14 @@ import React from 'react';
 
 import './Footer.css';
 import TasksFilter from '../TasksFilter';
-import { TaskFilters } from '../../types/TaskFilterInterface';
-import { ChangeTasks } from '../../types/FilterTasks';
+import { FilterTasks, TaskFilters } from '../TasksFilterItem/TasksFilterItem';
+
+export type RemoveCompleted = () => void;
+
+export interface ChangeTasks {
+  filterTasks: FilterTasks;
+  removeCompleted: RemoveCompleted;
+}
 
 interface FooterPropsInterface {
   filters: Array<TaskFilters>;

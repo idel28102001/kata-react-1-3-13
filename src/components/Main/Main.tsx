@@ -1,12 +1,12 @@
 import './Main.css';
 import React from 'react';
 
-import { TaskInterface } from '../../types/TaskInterface';
-import { TaskFilters } from '../../types/TaskFilterInterface';
 import TaskList from '../TaskList';
 import Footer from '../Footer';
-import { RefactorTaskMethods } from '../../types/RefactorTask';
-import { ChangeTasks } from '../../types/FilterTasks';
+import { ChangeTasks } from '../Footer/Footer';
+import { TaskFilters } from '../TasksFilterItem/TasksFilterItem';
+import { RefactorTaskMethods } from '../Task/Task';
+import { TaskInterface } from '../../common/createTask';
 
 interface MainSectionPropsInterface {
   tasks: Array<TaskInterface>;

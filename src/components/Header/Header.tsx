@@ -2,7 +2,7 @@ import './Header.css';
 import React from 'react';
 
 import NewTaskForm from '../NewTaskForm';
-import { AddTaskType } from '../../types/RefactorTask';
+import { AddTaskType } from '../NewTaskForm/NewTaskForm';
 
 interface HeaderPropsInterface {
   addTask: AddTaskType;

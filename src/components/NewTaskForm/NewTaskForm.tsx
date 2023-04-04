@@ -1,9 +1,9 @@
 import './NewTaskForm.css';
 import React, { createRef } from 'react';
 
-import { TaskPropsInterface } from '../../types/TaskInterface';
-import CreateTask from '../../common/createTask';
-import { AddTaskType } from '../../types/RefactorTask';
+import CreateTask, { TaskPropsInterface } from '../../common/createTask';
+
+export type AddTaskType = (arg: TaskPropsInterface) => void;
 
 interface NewTaskFormPropsInterface {
   addTask: AddTaskType;

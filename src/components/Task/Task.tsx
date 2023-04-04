@@ -1,9 +1,14 @@
 import React, { createRef } from 'react';
 
 import './Task.css';
-import { TaskInterface } from '../../types/TaskInterface';
-import { RefactorTaskMethods } from '../../types/RefactorTask';
 import CreatedNAgo from '../CreatedNAgo';
+import { TaskInterface } from '../../common/createTask';
+
+export interface RefactorTaskMethods {
+  removeTask: (id: number) => void;
+  completeTask: (id: number, isDone: boolean) => void;
+  editTask: (id: number, description: string) => void;
+}
 
 interface TaskItemPropsInterface {
   task: TaskInterface;

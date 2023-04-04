@@ -2,11 +2,12 @@ import './TodoApp.css';
 import React from 'react';
 
 import Header from '../Header';
-import Main from '../MainSection';
-import { TaskInterface, TaskPropsInterface } from '../../types/TaskInterface';
-import { TaskFilterFlags, TaskFilters } from '../../types/TaskFilterInterface';
-import { RefactorTaskMethods } from '../../types/RefactorTask';
-import { ChangeTasks } from '../../types/FilterTasks';
+import Main from '../Main';
+import { ChangeTasks } from '../Footer/Footer';
+import { TaskFilterFlags, TaskFilters } from '../TasksFilterItem/TasksFilterItem';
+import { RefactorTaskMethods } from '../Task/Task';
+import { TaskInterface, TaskPropsInterface } from '../../common/createTask';
+import { AddTaskType } from '../NewTaskForm/NewTaskForm';
 
 interface TodoAppPropsInterface {
   filters: Array<TaskFilters>;
@@ -38,16 +39,16 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     this.state = { ...props, tasks, flag: TaskFilterFlags.ALL };
   }
 
-  saveTasks = (tasks: Array<TaskInterface>) => {
-    const jsonString = JSON.stringify(tasks || []);
-    localStorage.setItem('tasks', jsonString);
-  };
-
   componentDidUpdate() {
     this.saveTasks(this.state.tasks);
   }
 
-  loadTasks = () => {
+  saveTasks = (tasks: Array<TaskInterface>): void => {
+    const jsonString = JSON.stringify(tasks || []);
+    localStorage.setItem('tasks', jsonString);
+  };
+
+  loadTasks = (): TaskInterface[] => {
     const jsonString = localStorage.getItem('tasks') || '';
     let result: Array<TaskInterface>;
     try {
@@ -58,7 +59,41 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     return result.map((e) => ({ ...e, createdAt: new Date(e.createdAt) }));
   };
 
-  filteredTasks = () => {
+  removeCompleted: ChangeTasks['removeCompleted'] = () => {
+    this.setState({ tasks: this.state.tasks.filter((e) => !e.isDone) });
+  };
+
+  filterTasks: ChangeTasks['filterTasks'] = (flag: TaskFilterFlags) => {
+    this.setState({ flag });
+  };
+
+  addTask: AddTaskType = (task: TaskPropsInterface) => {
+    const id = Math.max(...[...this.state.tasks.map((e) => e.id), 0]) + 1;
+    const newTasks = [...this.state.tasks, { ...task, id }];
+    this.setState({ tasks: newTasks });
+  };
+
+  removeTask: RefactorTaskMethods['removeTask'] = (id: number) => {
+    this.setState({ tasks: this.state.tasks.filter((e) => e.id !== id) });
+  };
+
+  completeTask: RefactorTaskMethods['completeTask'] = (id: number, isDone: boolean) => {
+    const currTasks = this.state.tasks.map((e) => {
+      if (e.id !== id) return e;
+      return { ...e, isDone };
+    });
+    this.setState({ tasks: currTasks });
+  };
+
+  editTask: RefactorTaskMethods['editTask'] = (id: number, description: string) => {
+    const currTasks = this.state.tasks.map((e) => {
+      if (e.id !== id) return e;
+      return { ...e, description };
+    });
+    this.setState({ tasks: currTasks });
+  };
+
+  filteredTasks = (): TaskInterface[] => {
     switch (this.state.flag) {
       case TaskFilterFlags.ALL: {
         return this.state.tasks;
@@ -72,41 +107,7 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     }
   };
 
-  removeCompleted = () => {
-    this.setState({ tasks: this.state.tasks.filter((e) => !e.isDone) });
-  };
-
-  filterTasks = (flag: TaskFilterFlags) => {
-    this.setState({ flag });
-  };
-
-  addTask = (task: TaskPropsInterface) => {
-    const id = Math.max(...[...this.state.tasks.map((e) => e.id), 0]) + 1;
-    const newTasks = [...this.state.tasks, { ...task, id }];
-    this.setState({ tasks: newTasks });
-  };
-
-  removeTask = (id: number) => {
-    this.setState({ tasks: this.state.tasks.filter((e) => e.id !== id) });
-  };
-
-  completeTask = (id: number, isDone: boolean) => {
-    const currTasks = this.state.tasks.map((e) => {
-      if (e.id !== id) return e;
-      return { ...e, isDone };
-    });
-    this.setState({ tasks: currTasks });
-  };
-
-  editTask = (id: number, description: string) => {
-    const currTasks = this.state.tasks.map((e) => {
-      if (e.id !== id) return e;
-      return { ...e, description };
-    });
-    this.setState({ tasks: currTasks });
-  };
-
-  itemsLeft() {
+  itemsLeft(): number {
     return this.state.tasks.filter((e) => !e.isDone).length;
   }
 

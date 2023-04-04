@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 import TodoApp from '../components/TodoApp';
-import { TaskFilterFlags, TaskFilters } from '../types/TaskFilterInterface';
+import { TaskFilterFlags, TaskFilters } from '../components/TasksFilterItem/TasksFilterItem';
 
 export default class App extends React.Component<unknown, unknown> {
   filters: Array<TaskFilters> = [

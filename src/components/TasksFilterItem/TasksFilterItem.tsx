@@ -1,8 +1,20 @@
 import './TasksFilterItem.css';
 import React from 'react';
 
-import { TaskFilters } from '../../types/TaskFilterInterface';
-import { FilterTasks } from '../../types/FilterTasks';
+export enum TaskFilterFlags {
+  ALL = 'all',
+  ACTIVE = 'active',
+  COMPLETED = 'completed',
+}
+
+export interface TaskFilters {
+  id: number;
+  value: TaskFilterFlags;
+  label: string;
+  checked: boolean;
+}
+
+export type FilterTasks = (flag: TaskFilterFlags) => void;
 
 interface TaskFilterItemPropsInterface {
   item: TaskFilters;
