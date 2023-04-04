@@ -2,19 +2,19 @@ import './TodoApp.css';
 import React from 'react';
 
 import Header from '../Header';
-import MainSection from '../MainSection';
+import Main from '../MainSection';
 import { TaskInterface, TaskPropsInterface } from '../../types/TaskInterface';
-import { TaskFilterFlags, TaskFilterItemInterface } from '../../types/TaskFilterInterface';
+import { TaskFilterFlags, TaskFilters } from '../../types/TaskFilterInterface';
 import { RefactorTaskMethods } from '../../types/RefactorTask';
 import { ChangeTasks } from '../../types/FilterTasks';
 
 interface TodoAppPropsInterface {
-  filters: Array<TaskFilterItemInterface>;
+  filters: Array<TaskFilters>;
 }
 
 interface TodoAppStateInterface {
   tasks: Array<TaskInterface>;
-  filters: Array<TaskFilterItemInterface>;
+  filters: Array<TaskFilters>;
   flag: TaskFilterFlags;
 }
 
@@ -114,7 +114,7 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     return (
       <section className="todoapp">
         <Header addTask={this.addTask} />
-        <MainSection
+        <Main
           itemsLeft={this.itemsLeft()}
           changeTasks={this.changeFunctions.current}
           refactorFunctions={this.refactorFunctions.current}

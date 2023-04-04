@@ -4,7 +4,7 @@ export enum TaskFilterFlags {
   COMPLETED = 'completed',
 }
 
-export interface TaskFilterItemInterface {
+export interface TaskFilters {
   id: number;
   value: TaskFilterFlags;
   label: string;

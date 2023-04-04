@@ -1,11 +1,11 @@
 import React from 'react';
 
 import './App.css';
-import { TaskFilterFlags, TaskFilterItemInterface } from '../types/TaskFilterInterface';
-import TodoApp from '../components/TodoApp/TodoApp';
+import TodoApp from '../components/TodoApp';
+import { TaskFilterFlags, TaskFilters } from '../types/TaskFilterInterface';
 
 export default class App extends React.Component<unknown, unknown> {
-  filters: Array<TaskFilterItemInterface> = [
+  filters: Array<TaskFilters> = [
     { value: TaskFilterFlags.ALL, checked: true, label: 'All', id: 1 },
     {
       value: TaskFilterFlags.ACTIVE,

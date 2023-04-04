@@ -2,7 +2,7 @@ import './NewTaskForm.css';
 import React, { createRef } from 'react';
 
 import { TaskPropsInterface } from '../../types/TaskInterface';
-import TaskInstance from '../../common/TaskInstance';
+import CreateTask from '../../common/createTask';
 import { AddTaskType } from '../../types/RefactorTask';
 
 interface NewTaskFormPropsInterface {
@@ -22,7 +22,7 @@ export default class NewTaskForm extends React.Component<NewTaskFormPropsInterfa
     if (this.ref.current) {
       const current = this.ref.current;
       if (current.value.trim()) {
-        const newTask: TaskPropsInterface = TaskInstance(current.value);
+        const newTask: TaskPropsInterface = CreateTask(current.value);
         this.props.addTask(newTask);
         current.value = '';
       }

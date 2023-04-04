@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TasksFilterItem from '../TasksFilterItem';
-import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
+import { TaskFilters } from '../../types/TaskFilterInterface';
 import { FilterTasks } from '../../types/FilterTasks';
 
 interface TaskFilterPropsInterface {
-  filters: Array<TaskFilterItemInterface>;
+  filters: Array<TaskFilters>;
   filterTasks: FilterTasks;
 }
 

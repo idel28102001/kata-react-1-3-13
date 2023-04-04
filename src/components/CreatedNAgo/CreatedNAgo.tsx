@@ -6,27 +6,22 @@ interface CreatedNAgoPropsInterface {
   createdAt: Date;
 }
 
-interface CreatedNAgoStateInterface {
+interface CreatedNAgoState {
   render: number;
 }
 
-export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterface, CreatedNAgoStateInterface> {
+export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterface, CreatedNAgoState> {
   state = { render: 0 };
-  isDidMount = false;
+  interval = -1 as any as NodeJS.Timer;
 
   componentDidMount() {
-    if (!this.isDidMount) {
-      setTimeout(() => {
-        this.setState((e) => ({ render: e.render + 1 }));
-      }, 1000);
-      this.isDidMount = true;
-    }
-  }
-
-  componentDidUpdate() {
-    setTimeout(() => {
+    this.interval = setInterval(() => {
       this.setState((e) => ({ render: e.render + 1 }));
     }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   createdAt() {

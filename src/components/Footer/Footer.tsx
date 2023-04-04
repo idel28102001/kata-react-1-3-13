@@ -2,11 +2,11 @@ import React from 'react';
 
 import './Footer.css';
 import TasksFilter from '../TasksFilter';
-import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
+import { TaskFilters } from '../../types/TaskFilterInterface';
 import { ChangeTasks } from '../../types/FilterTasks';
 
 interface FooterPropsInterface {
-  filters: Array<TaskFilterItemInterface>;
+  filters: Array<TaskFilters>;
   itemsLeft: number;
   changeTasks: ChangeTasks;
 }

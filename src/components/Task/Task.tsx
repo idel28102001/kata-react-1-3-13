@@ -47,7 +47,7 @@ export default class Task extends React.PureComponent<TaskItemPropsInterface, Ta
     const task = this.props.task;
     const liClass = this.state.isEditing ? 'editing' : task.isDone ? 'completed' : '';
     return (
-      <li className={liClass}>
+      <div className={liClass}>
         <div className="view">
           <input
             className="toggle"
@@ -68,7 +68,7 @@ export default class Task extends React.PureComponent<TaskItemPropsInterface, Ta
           )}
           <input type="submit" className="edit-submit" />
         </form>
-      </li>
+      </div>
     );
   }
 }

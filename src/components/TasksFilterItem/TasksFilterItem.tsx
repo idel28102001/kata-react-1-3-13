@@ -1,11 +1,11 @@
 import './TasksFilterItem.css';
 import React from 'react';
 
-import { TaskFilterItemInterface } from '../../types/TaskFilterInterface';
+import { TaskFilters } from '../../types/TaskFilterInterface';
 import { FilterTasks } from '../../types/FilterTasks';
 
 interface TaskFilterItemPropsInterface {
-  item: TaskFilterItemInterface;
+  item: TaskFilters;
   filterTasks: FilterTasks;
 }
 
