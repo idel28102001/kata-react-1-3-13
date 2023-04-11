@@ -29,6 +29,6 @@ export default class CreatedNAgo extends React.Component<CreatedNAgoPropsInterfa
   }
 
   render() {
-    return <span className="created">{this.createdAt()}</span>;
+    return <span className="description">{this.createdAt()}</span>;
   }
 }

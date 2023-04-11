@@ -5,6 +5,7 @@ import './Task.css';
 
 import CreatedNAgo from '../CreatedNAgo';
 import { TaskInterface } from '../../common/createTask';
+import Timer from '../Timer';
 
 export interface RefactorTaskMethods {
   removeTask: (id: number) => void;
@@ -65,7 +66,8 @@ export default class Task extends React.PureComponent<TaskProps, TaskState> {
             onChange={(e) => this.props.refactorFunctions.completeTask(task.id, e.target.checked)}
           />
           <label>
-            <span className="description">{task.description}</span>
+            <span className="title">{task.description}</span>
+            <Timer />
             <CreatedNAgo createdAt={task.createdAt} />
           </label>
           <button className="icon icon-edit" onClick={this.setToEdit} />

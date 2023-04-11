@@ -35,12 +35,13 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     this.changeFunctions = {
       current: { removeCompleted: this.removeCompleted, filterTasks: this.filterTasks },
     };
-    const tasks = this.loadTasks();
+    // const tasks = this.loadTasks();
+    const tasks: Array<TaskInterface> = [];
     this.state = { ...props, tasks, flag: TaskFilterFlags.ALL };
   }
 
   componentDidUpdate() {
-    this.saveTasks(this.state.tasks);
+    // this.saveTasks(this.state.tasks);
   }
 
   saveTasks = (tasks: Array<TaskInterface>): void => {
