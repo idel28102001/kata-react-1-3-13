@@ -1,5 +1,6 @@
 import './TodoApp.css';
 import React from 'react';
+import { differenceInMilliseconds, subMilliseconds } from 'date-fns';
 
 import Header from '../Header';
 import Main from '../Main';
@@ -8,6 +9,7 @@ import { TaskFilterFlags, TaskFilters } from '../TasksFilterItem/TasksFilterItem
 import { RefactorTaskMethods } from '../Task/Task';
 import { TaskInterface, TaskPropsInterface } from '../../common/createTask';
 import { AddTaskType } from '../NewTaskForm/NewTaskForm';
+import { TimerInterface, UpdateTimerType } from '../Timer/Timer';
 
 interface TodoAppPropsInterface {
   filters: Array<TaskFilters>;
@@ -30,6 +32,7 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
         completeTask: this.completeTask,
         removeTask: this.removeTask,
         editTask: this.editTask,
+        updateTimer: this.updateTimer,
       },
     };
     this.changeFunctions = {
@@ -39,6 +42,20 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     const tasks: Array<TaskInterface> = [];
     this.state = { ...props, tasks, flag: TaskFilterFlags.ALL };
   }
+
+  updateTimer: UpdateTimerType = (id, timer: TimerInterface) => {
+    const diffInMilliseconds = differenceInMilliseconds(new Date(), timer.startDiapason);
+    const startDiapason = subMilliseconds(new Date(), timer.diffInMS);
+    const resultTimer: TimerInterface = timer.isStopped
+      ? { ...timer, diffInMS: diffInMilliseconds, isStopped: true }
+      : { ...timer, isStopped: false, startDiapason };
+
+    const currTask = this.state.tasks.find((e) => e.id === id);
+    if (!currTask) return;
+    const resultTask = { ...currTask, timer: resultTimer };
+    const resultTasks = this.state.tasks.filter((e) => e.id !== id);
+    this.setState({ tasks: [...resultTasks, resultTask] });
+  };
 
   componentDidUpdate() {
     // this.saveTasks(this.state.tasks);
