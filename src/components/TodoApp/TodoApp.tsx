@@ -49,12 +49,11 @@ export default class TodoApp extends React.Component<TodoAppPropsInterface, Todo
     const resultTimer: TimerInterface = timer.isStopped
       ? { ...timer, diffInMS: diffInMilliseconds, isStopped: true }
       : { ...timer, isStopped: false, startDiapason };
-
-    const currTask = this.state.tasks.find((e) => e.id === id);
-    if (!currTask) return;
-    const resultTask = { ...currTask, timer: resultTimer };
-    const resultTasks = this.state.tasks.filter((e) => e.id !== id);
-    this.setState({ tasks: [...resultTasks, resultTask] });
+    const resultTasks = this.state.tasks.map((task) => {
+      if (task.id !== id) return task;
+      return { ...task, timer: resultTimer };
+    });
+    this.setState({ tasks: resultTasks });
   };
 
   componentDidUpdate() {
